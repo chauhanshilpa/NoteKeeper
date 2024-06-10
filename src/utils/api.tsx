@@ -26,5 +26,15 @@ export async function createNote(
 
 // get noteList
 export async function getNotesList() {
-  return notesList;
+  const newNotesList = [...notesList];
+  return newNotesList;
+}
+
+// update note
+export async function updateNote() {}
+
+// delete a note
+export async function deleteNote(noteId: string) {
+  const noteToDeleteIndex = notesList.findIndex((note) => note.id === noteId);
+  notesList.splice(noteToDeleteIndex, 1);
 }

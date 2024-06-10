@@ -25,9 +25,16 @@ function App() {
         onClick={() => setIsAddNoteClicked(true)}
       />
       {isAddNoteClicked && (
-        <AddNoteCard setIsAddNoteClicked={setIsAddNoteClicked} setNotesList ={setNotesList}/>
+        <AddNoteCard
+          setIsAddNoteClicked={setIsAddNoteClicked}
+          setNotesList={setNotesList}
+        />
       )}
-      <NotesList notesList={notesList} />
+      <NotesList
+        notesList={notesList}
+        setNotesList={setNotesList}
+        setIsAddNoteClicked={setIsAddNoteClicked}
+      />
     </>
   );
 }
