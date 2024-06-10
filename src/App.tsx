@@ -17,18 +17,18 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <>
       <img
         src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/addNote.png"
         alt="add-note"
-        className="h-10 w-10 absolute right-0 mr-5 cursor-pointer"
+        className="h-10 w-10 mr-5 cursor-pointer"
         onClick={() => setIsAddNoteClicked(true)}
       />
       {isAddNoteClicked && (
         <AddNoteCard setIsAddNoteClicked={setIsAddNoteClicked} setNotesList ={setNotesList}/>
       )}
       <NotesList notesList={notesList} />
-    </div>
+    </>
   );
 }
 

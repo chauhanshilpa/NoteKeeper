@@ -1,5 +1,5 @@
 import { Note } from "./classModels";
-import { uuid } from "uuidv4";
+import { v4 as uuidv4 } from "uuid";
 
 // This file contains all the hard coded backend
 
@@ -11,7 +11,7 @@ export async function createNote(
   inputNoteTagline: string,
   inputNoteBody: string
 ) {
-  let noteId = uuid();
+  let noteId = uuidv4();
   let newNote = new Note(
     noteId,
     inputNoteTitle,

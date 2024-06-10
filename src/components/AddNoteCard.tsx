@@ -72,7 +72,7 @@ const AddNoteCard = ({ setIsAddNoteClicked, setNotesList }: Props) => {
           <span>
             <IoIosAdd className="text-xl" />
           </span>
-          <span> Add</span>
+          <span>Add</span>
         </button>
         <button
           type="button"
