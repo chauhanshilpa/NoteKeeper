@@ -31,10 +31,20 @@ export async function getNotesList() {
 }
 
 // update note
-export async function updateNote() {}
+export async function updateNote(
+  noteId: string,
+  title: string,
+  tagline: string,
+  body: string
+) {
+  const newNotesList = [...notesList];
+}
 
 // delete a note
 export async function deleteNote(noteId: string) {
-  const noteToDeleteIndex = notesList.findIndex((note) => note.id === noteId);
+  const newNotesList = [...notesList];
+  const noteToDeleteIndex = newNotesList.findIndex(
+    (note) => note.id === noteId
+  );
   notesList.splice(noteToDeleteIndex, 1);
 }

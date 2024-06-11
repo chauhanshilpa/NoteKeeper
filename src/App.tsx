@@ -19,13 +19,26 @@ function App() {
 
   return (
     <>
-    <Navbar/>
-      <img
-        src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/addNote.png"
-        alt="add-note"
-        className="h-10 w-10 mr-5 cursor-pointer"
-        onClick={() => setIsAddNoteClicked(true)}
-      />
+      <Navbar />
+      {notesList.length > 0 ? (
+        <div className="flex justify-end">
+          <img
+            src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/add.png"
+            alt="add-note"
+            className="h-8 w-8 mr-5 cursor-pointer mt-5"
+            onClick={() => setIsAddNoteClicked(true)}
+          />
+        </div>
+      ) : (
+        <img
+          src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/addNote.png"
+          alt="add-note"
+          className={`h-80 m-auto mt-20 cursor-pointer ${
+            isAddNoteClicked && "hidden"
+          }`}
+          onClick={() => setIsAddNoteClicked(true)}
+        />
+      )}
       {isAddNoteClicked && (
         <AddNoteCard
           setIsAddNoteClicked={setIsAddNoteClicked}
@@ -35,7 +48,6 @@ function App() {
       <NotesList
         notesList={notesList}
         setNotesList={setNotesList}
-        setIsAddNoteClicked={setIsAddNoteClicked}
       />
     </>
   );
