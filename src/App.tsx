@@ -4,6 +4,7 @@ import NotesList from "./components/NotesList";
 import { Note } from "./utils/classModels";
 import AddNoteCard from "./components/AddNoteCard";
 import { getNotesList } from "./utils/api";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [notesList, setNotesList] = useState<Note[]>([]);
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <>
+    <Navbar/>
       <img
         src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/addNote.png"
         alt="add-note"
