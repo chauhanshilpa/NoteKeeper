@@ -1,7 +1,7 @@
 import { VscPinned } from "react-icons/vsc";
 import { TbPinnedFilled } from "react-icons/tb";
 import { Note } from "../utils/classModels";
-import { deleteNote, getNotesList } from "../utils/api";
+import { deleteNote, getNotesList, updateNote } from "../utils/api";
 import { useState } from "react";
 import UpdateNoteModal from "./UpdateNoteModal";
 interface Props {
@@ -13,8 +13,19 @@ interface Props {
 }
 
 const NoteCard = ({ noteId, title, tagline, body, setNotesList }: Props) => {
+
   const [isUpdateNoteModalOpen, setIsUpdateNoteModalOpen] =
     useState<boolean>(false);
+  const [noteTitle, setNoteTitle] = useState<string>(title);
+  const [noteTagline, setNoteTagline] = useState<string>(tagline);
+  const [noteBody, setNoteBody] = useState<string>(body);
+
+  async function handleUpdateNoteCard() {
+    await updateNote(noteId, noteTitle, noteTagline, noteBody);
+    setIsUpdateNoteModalOpen(false);
+    const response = await getNotesList();
+    setNotesList(response);
+  }
 
   async function handleDeleteNote() {
     await deleteNote(noteId);
@@ -24,7 +35,11 @@ const NoteCard = ({ noteId, title, tagline, body, setNotesList }: Props) => {
 
   return (
     <>
-      <div className="bg-yellow-200 p-2 rounded">
+      <div
+        className={`bg-yellow-200 p-2 rounded ${
+          isUpdateNoteModalOpen && "invisible"
+        }`}
+      >
         <div className="flex justify-end">
           {/* to pin */}
           <VscPinned className="text-xl font-bold cursor-pointer" />
@@ -32,11 +47,11 @@ const NoteCard = ({ noteId, title, tagline, body, setNotesList }: Props) => {
           {/* <TbPinnedFilled className="text-xl font-bold cursor-pointer"/> */}
         </div>
         <div>
-          <div className="h-[30%] p-2 text-xl font-bold">{title}</div>
+          <div className="h-[30%] p-2 text-xl font-bold">{noteTitle}</div>
           <div className="flex items-center font-semibold text-sm h-[20%] p-2">
-            {tagline}
+            {noteTagline}
           </div>
-          <div className="h-[50%] text-md p-2">{body}</div>
+          <div className="h-[50%] text-md p-2">{noteBody}</div>
         </div>
         <div className="flex justify-end gap-2">
           <img
@@ -55,11 +70,14 @@ const NoteCard = ({ noteId, title, tagline, body, setNotesList }: Props) => {
       </div>
       {isUpdateNoteModalOpen && (
         <UpdateNoteModal
-          title={title}
-          tagline={tagline}
-          body={body}
-          noteId={noteId}
+          noteTitle={noteTitle}
+          setNoteTitle={setNoteTitle}
+          noteTagline={noteTagline}
+          setNoteTagline={setNoteTagline}
+          noteBody={noteBody}
+          setNoteBody={setNoteBody}
           setIsUpdateNoteModalOpen={setIsUpdateNoteModalOpen}
+          handleUpdateNoteCard={handleUpdateNoteCard}
         />
       )}
     </>

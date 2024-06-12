@@ -23,7 +23,6 @@ export async function createNote(
   );
   notesList.push(newNote);
 }
-
 // get noteList
 export async function getNotesList() {
   const newNotesList = [...notesList];
@@ -33,17 +32,19 @@ export async function getNotesList() {
 // update note
 export async function updateNote(
   noteId: string,
-  title: string,
-  tagline: string,
-  body: string
+  newTitle: string,
+  newTagline: string,
+  newBody: string
 ) {
-  const newNotesList = [...notesList];
+  const toUpdateNoteIndex = notesList.findIndex((note) => note.id === noteId);
+  notesList[toUpdateNoteIndex].title = newTitle;
+  notesList[toUpdateNoteIndex].tagline = newTagline;
+  notesList[toUpdateNoteIndex].body = newBody;
 }
 
 // delete a note
 export async function deleteNote(noteId: string) {
-  const newNotesList = [...notesList];
-  const noteToDeleteIndex = newNotesList.findIndex(
+  const noteToDeleteIndex = notesList.findIndex(
     (note) => note.id === noteId
   );
   notesList.splice(noteToDeleteIndex, 1);

@@ -21,11 +21,11 @@ function App() {
     <>
       <Navbar />
       {notesList.length > 0 ? (
-        <div className="flex justify-end">
+        <div className="flex items-center justify-end">
           <img
             src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/add.png"
             alt="add-note"
-            className="h-8 w-8 mr-5 cursor-pointer mt-5"
+            className="h-5 w-5 mr-5 cursor-pointer mt-5"
             onClick={() => setIsAddNoteClicked(true)}
           />
         </div>
