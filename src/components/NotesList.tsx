@@ -10,13 +10,14 @@ const NoteList = ({ notesList, setNotesList }: Props) => {
  
   return (
     <div className="grid grid-cols-3 gap-4 w-[80%] m-auto mt-5">
-      {notesList.map(({ id, title, tagline, body }) => (
+      {notesList.map(({ dateOfCreation, id, title, tagline, body }) => (
         <NoteCard
           key={id}
           noteId={id}
           title={title}
           tagline={tagline}
           body={body}
+          dateOfCreation={dateOfCreation}
           setNotesList={setNotesList}
         />
       ))}

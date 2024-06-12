@@ -9,10 +9,18 @@ interface Props {
   title: string;
   tagline: string;
   body: string;
+  dateOfCreation: string;
   setNotesList: React.Dispatch<React.SetStateAction<Note[]>>;
 }
 
-const NoteCard = ({ noteId, title, tagline, body, setNotesList }: Props) => {
+const NoteCard = ({
+  noteId,
+  title,
+  tagline,
+  body,
+  dateOfCreation, 
+  setNotesList,
+}: Props) => {
 
   const [isUpdateNoteModalOpen, setIsUpdateNoteModalOpen] =
     useState<boolean>(false);
@@ -53,19 +61,22 @@ const NoteCard = ({ noteId, title, tagline, body, setNotesList }: Props) => {
           </div>
           <div className="h-[50%] text-md p-2">{noteBody}</div>
         </div>
-        <div className="flex justify-end gap-2">
-          <img
-            src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/edit.png"
-            alt="edit-note-icon"
-            className="h-5 w-5 cursor-pointer"
-            onClick={() => setIsUpdateNoteModalOpen(true)}
-          />
-          <img
-            src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/delete.png"
-            alt="delete-note-icon"
-            className="h-5 w-5 cursor-pointer"
-            onClick={handleDeleteNote}
-          />
+        <div className="flex justify-between gap-2">
+          <div className="text-xs font-light m-2 text-gray-500">{dateOfCreation}</div>
+          <div className="flex justify-end gap-2">
+            <img
+              src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/edit.png"
+              alt="edit-note-icon"
+              className="h-5 w-5 cursor-pointer"
+              onClick={() => setIsUpdateNoteModalOpen(true)}
+            />
+            <img
+              src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/delete.png"
+              alt="delete-note-icon"
+              className="h-5 w-5 cursor-pointer"
+              onClick={handleDeleteNote}
+            />
+          </div>
         </div>
       </div>
       {isUpdateNoteModalOpen && (
