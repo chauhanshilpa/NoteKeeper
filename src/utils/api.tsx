@@ -42,10 +42,17 @@ export async function updateNote(
   notesList[toUpdateNoteIndex].body = newBody;
 }
 
-// delete a note
-export async function deleteNote(noteId: string) {
-  const noteToDeleteIndex = notesList.findIndex(
+export async function togglePinnedNote(noteId: string, isPinned: boolean) {
+  let newNotesList = [...notesList];
+  const noteToChangePinnedState = newNotesList.findIndex(
     (note) => note.id === noteId
   );
+  newNotesList[noteToChangePinnedState].isPinned = isPinned;
+}
+
+// delete a note
+export async function deleteNote(noteId: string) {
+  const noteToDeleteIndex = notesList.findIndex((note) => note.id === noteId);
+  // In api you can set isDeleted to true
   notesList.splice(noteToDeleteIndex, 1);
 }
