@@ -5,10 +5,12 @@ import { Note } from "./utils/classModels";
 import AddNoteCard from "./components/AddNoteCard";
 import { getNotesList } from "./utils/api";
 import Navbar from "./components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const [notesList, setNotesList] = useState<Note[]>([]);
   const [isAddNoteClicked, setIsAddNoteClicked] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(0);
 
   useEffect(() => {
     (async function () {
@@ -16,6 +18,8 @@ function App() {
       setNotesList(response);
     })();
   }, []);
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -45,10 +49,29 @@ function App() {
           setNotesList={setNotesList}
         />
       )}
-      <NotesList
-        notesList={notesList}
-        setNotesList={setNotesList}
-      />
+      
+      <NotesList notesList={notesList} setNotesList={setNotesList} />
+
+      <div className="flex justify-between mx-5">
+        <button
+          className="p-2 bg-blue-100 rounded"
+          onClick={() => {
+            setCurrentPage(currentPage - 1);
+            navigate(`/${currentPage - 1}`);
+          }}
+        >
+          previous
+        </button>
+        <button
+          className="p-2 bg-blue-100 rounded"
+          onClick={() => {
+            setCurrentPage(currentPage + 1);
+            navigate(`/${currentPage + 1}`);
+          }}
+        >
+          next
+        </button>
+      </div>
     </>
   );
 }
