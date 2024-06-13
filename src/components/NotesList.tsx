@@ -2,14 +2,18 @@ import { Note } from "../utils/classModels";
 import NoteCard from "./NoteCard";
 
 interface Props {
-  notesList: Note[];
+  currentNotesList: Note[];
   setNotesList: React.Dispatch<React.SetStateAction<Note[]>>;
 }
 
-const NoteList = ({ notesList, setNotesList }: Props) => {
-
- const pinnedNotesList = notesList.filter(note => note.isPinned === true);
- const unpinnedNotesList = notesList.filter((note) => note.isPinned === false);
+const NotesList = ({ currentNotesList, setNotesList }: Props) => {
+  
+  const pinnedNotesList = currentNotesList.filter(
+    (note) => note.isPinned === true
+  );
+  const unpinnedNotesList = currentNotesList.filter(
+    (note) => note.isPinned === false
+  );
 
   return (
     <div className="w-[80%] m-auto mt-5">
@@ -31,4 +35,4 @@ const NoteList = ({ notesList, setNotesList }: Props) => {
   );
 };
 
-export default NoteList;
+export default NotesList;

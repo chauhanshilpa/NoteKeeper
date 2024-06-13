@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import NotesList from "./components/NotesList";
+import NotesPage from "./components/NotesPage";
 import { Note } from "./utils/classModels";
 import AddNoteCard from "./components/AddNoteCard";
 import { getNotesList } from "./utils/api";
 import Navbar from "./components/Navbar";
-import { useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 function App() {
   const [notesList, setNotesList] = useState<Note[]>([]);
   const [isAddNoteClicked, setIsAddNoteClicked] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async function () {
@@ -19,11 +21,20 @@ function App() {
     })();
   }, []);
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    const page = Math.floor(notesList.length / 6);
+    handlePageNavigation(page);
+    // eslint-disable-next-line
+  }, []);
+
+  function handlePageNavigation(newPage: number) {
+    setCurrentPage(newPage);
+    navigate(`/${newPage}`);
+  }
 
   return (
     <>
-      <Navbar />
+      <Navbar setCurrentPage ={setCurrentPage}/>
       {notesList.length > 0 ? (
         <div className="flex items-center justify-end">
           <img
@@ -49,29 +60,20 @@ function App() {
           setNotesList={setNotesList}
         />
       )}
-      
-      <NotesList notesList={notesList} setNotesList={setNotesList} />
-
-      <div className="flex justify-between mx-5">
-        <button
-          className="p-2 bg-blue-100 rounded"
-          onClick={() => {
-            setCurrentPage(currentPage - 1);
-            navigate(`/${currentPage - 1}`);
-          }}
-        >
-          previous
-        </button>
-        <button
-          className="p-2 bg-blue-100 rounded"
-          onClick={() => {
-            setCurrentPage(currentPage + 1);
-            navigate(`/${currentPage + 1}`);
-          }}
-        >
-          next
-        </button>
-      </div>
+      <Routes>
+        <Route path="/" element={<Navigate to="/0" />} />
+        <Route
+          path="/:currentPage"
+          element={
+            <NotesPage
+              notesList={notesList}
+              setNotesList={setNotesList}
+              currentPage={currentPage}
+              handlePageNavigation={handlePageNavigation}
+            />
+          }
+        />
+      </Routes>
     </>
   );
 }

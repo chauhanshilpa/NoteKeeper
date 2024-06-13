@@ -1,8 +1,21 @@
+import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+interface Props {
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const Navbar = ({ setCurrentPage }: Props) => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex items-center p-5 shadow-md h-14 mb-2">
-      <div className="flex items-center gap-2 italic text-lg">
+      <div
+        className="flex items-center gap-2 italic text-lg"
+        onClick={() => {
+          navigate("/");
+          setCurrentPage(0);
+        }}
+      >
         <img
           src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/fabicon.png"
           alt="note-keeper-icon"
