@@ -44,7 +44,7 @@ const NoteCard = ({ note, setNotesList }: Props) => {
   return (
     <>
       <div
-        className={`bg-yellow-200 p-2 rounded ${
+        className={`break-inside-avoid w-[100%] bg-yellow-200 p-2 mb-3 grid-auto-flow h-max rounded ${
           isUpdateNoteModalOpen && "invisible"
         }`}
       >
@@ -68,9 +68,7 @@ const NoteCard = ({ note, setNotesList }: Props) => {
           <div className="font-semibold text-sm pl-2 text-wrap break-words">
             {noteTagline}
           </div>
-          <div className="text-lg p-2 text-wrap break-words">
-            {noteBody}
-          </div>
+          <div className="text-lg p-2 text-wrap break-words">{noteBody}</div>
         </div>
         <div className="flex justify-between gap-2">
           <div className="text-xs font-light m-2 text-gray-500">
