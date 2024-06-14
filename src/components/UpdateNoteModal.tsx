@@ -1,5 +1,4 @@
 import { RxUpdate } from "react-icons/rx";
-
 interface Props {
   noteTitle: string;
   setNoteTitle: React.Dispatch<React.SetStateAction<string>>;
@@ -36,7 +35,7 @@ const UpdateNoteModal = ({
             type="text"
             name="title"
             className="py-2.5 px-0 w-full text-xl text-gray-900 bg-transparent appearance-none focus:outline-none focus:ring-0 peer font-bold"
-            placeholder=""
+            placeholder={noteTitle ? noteTitle : "Title"}
             required
             value={noteTitle}
             onChange={(event) => setNoteTitle(event?.target.value)}
@@ -47,7 +46,7 @@ const UpdateNoteModal = ({
             type="text"
             name="tagline"
             className="py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent focus:outline-none focus:ring-0 peer font-semibold"
-            placeholder=""
+            placeholder={noteTagline ? noteTagline : "Tagline"}
             value={noteTagline}
             onChange={(event) => setNoteTagline(event?.target.value)}
           />
@@ -57,7 +56,7 @@ const UpdateNoteModal = ({
             type="text"
             name="body"
             className="py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent focus:outline-none focus:ring-0 peer"
-            placeholder=""
+            placeholder={noteBody ? noteBody : "body"}
             required
             value={noteBody}
             onChange={(event) => setNoteBody(event?.target.value)}
