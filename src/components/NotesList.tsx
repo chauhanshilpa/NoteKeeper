@@ -30,7 +30,7 @@ const NotesList = ({ currentNotesList, setNotesList }: Props) => {
   return (
     <div className="w-[80%] m-auto mt-14">
       {pinnedNotesList.length > 0 && (
-        <div className="columns-2 md:columns-3 lg:columns-4 gap-6 mb-5">
+        <div className="w-[80%] columns-1 sm:columns-2 md:columns-3 xl:columns-4 m-auto">
           {pinnedNotesList.map((note) => (
             <NoteCard key={note.id} note={note} setNotesList={setNotesList} />
           ))}
@@ -39,7 +39,7 @@ const NotesList = ({ currentNotesList, setNotesList }: Props) => {
       {/* flex flex-wrap justify-center sm:grid sm:grid-cols-3 gap-5 xl:grid-cols-4
       m-auto */}
       {unpinnedNotesList.length > 0 && (
-        <div className="columns-2 md:columns-3 lg:columns-4 gap-6">
+        <div className="xs:w-[60%] sm:w-[100%] columns-1 sm:columns-2 md:columns-3 2xl:columns-4 m-auto">
           {unpinnedNotesList.map((note) => (
             <NoteCard key={note.id} note={note} setNotesList={setNotesList} />
           ))}

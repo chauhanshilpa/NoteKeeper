@@ -44,7 +44,7 @@ const NoteCard = ({ note, setNotesList }: Props) => {
   return (
     <>
       <div
-        className={`break-inside-avoid w-[100%] bg-yellow-200 p-2 mb-3 grid-auto-flow h-max rounded ${
+        className={`break-inside-avoid bg-yellow-200 p-2 mb-3 h-max rounded ${
           isUpdateNoteModalOpen && "invisible"
         }`}
       >
