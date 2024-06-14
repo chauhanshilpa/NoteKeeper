@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import NotesPage from "./components/NotesPage";
 import { Note } from "./utils/classModels";
@@ -13,6 +13,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   const navigate = useNavigate();
+  let previousNotesListLength = useRef(notesList.length);
 
   useEffect(() => {
     (async function () {
@@ -22,10 +23,15 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const page = Math.floor(notesList.length / 6);
-    handlePageNavigation(page);
+    if (previousNotesListLength.current < notesList.length) {
+      const page = Math.floor(notesList.length / 6);
+      if (page !== currentPage && notesList.length % 6 !== 0) {
+        handlePageNavigation(page);
+      }
+    }
+    previousNotesListLength.current = notesList.length;
     // eslint-disable-next-line
-  }, []);
+  }, [notesList.length]);
 
   function handlePageNavigation(newPage: number) {
     setCurrentPage(newPage);
@@ -34,7 +40,7 @@ function App() {
 
   return (
     <>
-      <Navbar setCurrentPage ={setCurrentPage}/>
+      <Navbar setCurrentPage={setCurrentPage} />
       {notesList.length > 0 ? (
         <div className="fixed right-0">
           <img
