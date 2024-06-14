@@ -28,7 +28,7 @@ const NotesList = ({ currentNotesList, setNotesList }: Props) => {
   );
 
   return (
-    <div className="w-[80%] m-auto mt-5">
+    <div className="w-[80%] m-auto mt-14">
       {pinnedNotesList.length > 0 && (
         <div className="columns-2 md:columns-3 lg:columns-4 gap-6 mb-5">
           {pinnedNotesList.map((note) => (

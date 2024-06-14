@@ -36,7 +36,7 @@ function App() {
     <>
       <Navbar setCurrentPage ={setCurrentPage}/>
       {notesList.length > 0 ? (
-        <div className="flex items-center justify-end">
+        <div className="fixed right-0">
           <img
             src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/add.png"
             alt="add-note"
