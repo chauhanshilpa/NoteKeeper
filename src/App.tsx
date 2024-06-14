@@ -6,6 +6,7 @@ import AddNoteCard from "./components/AddNoteCard";
 import { getNotesList } from "./utils/api";
 import Navbar from "./components/Navbar";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Tooltip } from "react-tooltip";
 
 function App() {
   const [notesList, setNotesList] = useState<Note[]>([]);
@@ -48,6 +49,8 @@ function App() {
             alt="add-note"
             className="h-5 w-5 mr-5 cursor-pointer mt-5"
             onClick={() => setIsAddNoteClicked(true)}
+            data-tooltip-id="add-new-note"
+            data-tooltip-content="Add note"
           />
         </div>
       ) : (
@@ -58,6 +61,8 @@ function App() {
             isAddNoteClicked && "hidden"
           }`}
           onClick={() => setIsAddNoteClicked(true)}
+          data-tooltip-id="add-new-note"
+          data-tooltip-content="Add note"
         />
       )}
       {isAddNoteClicked && (
@@ -80,6 +85,7 @@ function App() {
           }
         />
       </Routes>
+      <Tooltip id="add-new-note" className="tooltip" />
     </>
   );
 }

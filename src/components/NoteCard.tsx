@@ -9,6 +9,7 @@ import {
 } from "../utils/api";
 import { useState } from "react";
 import UpdateNoteModal from "./UpdateNoteModal";
+import { Tooltip } from "react-tooltip";
 interface Props {
   note: Note;
   setNotesList: React.Dispatch<React.SetStateAction<Note[]>>;
@@ -53,11 +54,15 @@ const NoteCard = ({ note, setNotesList }: Props) => {
             <TbPinnedFilled
               className="text-xl font-bold cursor-pointer"
               onClick={handlePinNote}
+              data-tooltip-id="unpin"
+              data-tooltip-content="Unpin"
             />
           ) : (
             <VscPinned
               className="text-xl font-bold cursor-pointer"
               onClick={handlePinNote}
+              data-tooltip-id="pin"
+              data-tooltip-content="Pin"
             />
           )}
         </div>
@@ -80,12 +85,16 @@ const NoteCard = ({ note, setNotesList }: Props) => {
               alt="edit-note-icon"
               className="h-5 w-5 cursor-pointer"
               onClick={() => setIsUpdateNoteModalOpen(true)}
+              data-tooltip-id="edit"
+              data-tooltip-content="Edit"
             />
             <img
               src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/delete.png"
               alt="delete-note-icon"
               className="h-5 w-5 cursor-pointer"
               onClick={handleDeleteNote}
+              data-tooltip-id="delete"
+              data-tooltip-content="Delete"
             />
           </div>
         </div>
@@ -102,6 +111,10 @@ const NoteCard = ({ note, setNotesList }: Props) => {
           handleUpdateNoteCard={handleUpdateNoteCard}
         />
       )}
+      <Tooltip id="pin" className="tooltip" />
+      <Tooltip id="unpin" className="tooltip" />
+      <Tooltip id="edit" className="tooltip" />
+      <Tooltip id="delete" className="tooltip" />
     </>
   );
 };

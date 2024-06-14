@@ -1,4 +1,5 @@
 import { RxUpdate } from "react-icons/rx";
+import { Tooltip } from "react-tooltip";
 interface Props {
   noteTitle: string;
   setNoteTitle: React.Dispatch<React.SetStateAction<string>>;
@@ -29,6 +30,8 @@ const UpdateNoteModal = ({
           alt="cancel"
           className="h-5 w-5 cursor-pointer self-end"
           onClick={() => setIsUpdateNoteModalOpen(false)}
+          data-tooltip-id="cancel"
+          data-tooltip-content="Cancel"
         />
         <div className="relative z-0 w-full mb-5 group h-[20%]">
           <input
@@ -75,6 +78,7 @@ const UpdateNoteModal = ({
           </button>
         </div>
       </div>
+      <Tooltip id="cancel" className="tooltip" />
     </div>
   );
 };

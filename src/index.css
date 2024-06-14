@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .tooltip {
+    border-radius: 10px !important;
+    background-color: #575c6e !important;
+  }
+}

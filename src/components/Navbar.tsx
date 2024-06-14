@@ -19,7 +19,7 @@ const Navbar = ({ setCurrentPage }: Props) => {
         <img
           src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/fabicon.png"
           alt="note-keeper-icon"
-          className="h-10 w-10"
+          className="h-10 w-10 cursor-pointer"
         />
         <span className="font-bold">Notes Keeper</span>
       </div>

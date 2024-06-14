@@ -3,6 +3,7 @@ import { IoIosAdd } from "react-icons/io";
 import { CiEraser } from "react-icons/ci";
 import { createNote, getNotesList } from "../utils/api";
 import { Note } from "../utils/classModels";
+import { Tooltip } from "react-tooltip";
 
 interface Props {
   setIsAddNoteClicked: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,6 +33,8 @@ const AddNoteCard = ({ setIsAddNoteClicked, setNotesList }: Props) => {
           alt="cancel"
           className="h-5 w-5 cursor-pointer self-end"
           onClick={() => setIsAddNoteClicked(false)}
+          data-tooltip-id="cancel"
+          data-tooltip-content="Cancel"
         />
         <div className="relative z-0 w-full mb-5 group">
           <input
@@ -92,6 +95,7 @@ const AddNoteCard = ({ setIsAddNoteClicked, setNotesList }: Props) => {
           </button>
         </div>
       </div>
+      <Tooltip id="cancel" className="tooltip" />
     </div>
   );
 };
