@@ -1,3 +1,4 @@
+import { RefObject, useRef } from "react";
 import { VscPinned } from "react-icons/vsc";
 import { TbPinnedFilled } from "react-icons/tb";
 import { Note } from "../utils/classModels";
@@ -10,17 +11,21 @@ import {
 import { useState } from "react";
 import UpdateNoteModal from "./UpdateNoteModal";
 import { Tooltip } from "react-tooltip";
+import { motion } from "framer-motion";
 interface Props {
   note: Note;
   setNotesList: React.Dispatch<React.SetStateAction<Note[]>>;
+  appRef: RefObject<HTMLDivElement>;
 }
 
-const NoteCard = ({ note, setNotesList }: Props) => {
+const NoteCard = ({ note, setNotesList, appRef }: Props) => {
   const [isUpdateNoteModalOpen, setIsUpdateNoteModalOpen] =
     useState<boolean>(false);
   const [noteTitle, setNoteTitle] = useState<string>(note.title);
   const [noteTagline, setNoteTagline] = useState<string>(note.tagline);
   const [noteBody, setNoteBody] = useState<string>(note.body);
+
+  const pipRef = useRef<HTMLDivElement>(null);
 
   async function handleUpdateNoteCard() {
     await updateNote(note.id, noteTitle, noteTagline, noteBody);
@@ -42,10 +47,35 @@ const NoteCard = ({ note, setNotesList }: Props) => {
     setNotesList(response.data.newNotesList);
   }
 
+  const modifyTarget = (target: number) => {
+    if (appRef.current && pipRef.current) {
+      const appRect = appRef.current.getBoundingClientRect();
+      const pipRect = pipRef.current.getBoundingClientRect();
+      const pipMiddleX = pipRect.width / 2;
+      const pipMiddleY = pipRect.height / 2;
+      if (target + pipMiddleX > appRect.width / 2) {
+        return appRect.width;
+      } else if (target + pipMiddleY > appRect.height / 2) {
+        return appRect.height;
+      }
+      return 0;
+    }
+    return 0;
+  };
+
   return (
-    <>
+    <motion.div
+      drag
+      dragTransition={{
+        modifyTarget,
+        power: 0,
+        min: 0,
+        max: 200,
+        timeConstant: 250,
+      }}
+    >
       <div
-        className={`break-inside-avoid bg-yellow-200 p-2 mb-5 h-max rounded ${
+        className={`break-inside-avoid bg-yellow-200 p-2 mb-5 h-max rounded-xl ${
           isUpdateNoteModalOpen && "invisible"
         }`}
       >
@@ -115,7 +145,7 @@ const NoteCard = ({ note, setNotesList }: Props) => {
       <Tooltip id="unpin" className="tooltip" />
       <Tooltip id="edit" className="tooltip" />
       <Tooltip id="delete" className="tooltip" />
-    </>
+    </motion.div>
   );
 };
 

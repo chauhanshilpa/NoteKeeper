@@ -1,13 +1,14 @@
+import { RefObject } from "react";
 import { Note } from "../utils/classModels";
 import NoteCard from "./NoteCard";
 
 interface Props {
   currentNotesList: Note[];
   setNotesList: React.Dispatch<React.SetStateAction<Note[]>>;
+  appRef: RefObject<HTMLDivElement>;
 }
 
-const NotesList = ({ currentNotesList, setNotesList }: Props) => {
-
+const NotesList = ({ currentNotesList, setNotesList, appRef }: Props) => {
   const pinnedNotesList = currentNotesList.filter(
     (note) => note.isPinned === true
   );
@@ -20,14 +21,24 @@ const NotesList = ({ currentNotesList, setNotesList }: Props) => {
       {pinnedNotesList.length > 0 && (
         <div className="xs:w-[60%] sm:w-[100%] columns-1 sm:columns-2 md:columns-3 2xl:columns-4 m-auto mb-10">
           {pinnedNotesList.map((note) => (
-            <NoteCard key={note.id} note={note} setNotesList={setNotesList} />
+            <NoteCard
+              key={note.id}
+              note={note}
+              setNotesList={setNotesList}
+              appRef
+            ={appRef}/>
           ))}
         </div>
       )}
       {unpinnedNotesList.length > 0 && (
         <div className="xs:w-[60%] sm:w-[100%] columns-1 sm:columns-2 md:columns-3 2xl:columns-4 m-auto">
           {unpinnedNotesList.map((note) => (
-            <NoteCard key={note.id} note={note} setNotesList={setNotesList} />
+            <NoteCard
+              key={note.id}
+              note={note}
+              setNotesList={setNotesList}
+              appRef={appRef}
+            />
           ))}
         </div>
       )}
