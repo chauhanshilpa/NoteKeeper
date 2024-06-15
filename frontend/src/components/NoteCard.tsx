@@ -64,71 +64,81 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
   };
 
   return (
-    <motion.div
-      drag
-      dragTransition={{
-        modifyTarget,
-        power: 0,
-        min: 0,
-        max: 200,
-        timeConstant: 250,
-      }}
-    >
-      <div
-        className={`break-inside-avoid bg-yellow-200 p-2 mb-5 h-max rounded-xl ${
-          isUpdateNoteModalOpen && "invisible"
-        }`}
+    <>
+      <motion.div
+        drag
+        dragTransition={{
+          modifyTarget,
+          power: 0,
+          min: 0,
+          max: 200,
+          timeConstant: 250,
+        }}
       >
-        <div className="flex justify-end">
-          {note.isPinned ? (
-            <TbPinnedFilled
-              className="text-xl font-bold cursor-pointer"
-              onClick={handlePinNote}
-              data-tooltip-id="unpin"
-              data-tooltip-content="Unpin"
-            />
-          ) : (
-            <VscPinned
-              className="text-xl font-bold cursor-pointer"
-              onClick={handlePinNote}
-              data-tooltip-id="pin"
-              data-tooltip-content="Pin"
-            />
-          )}
-        </div>
-        <div>
-          <div className="p-2 text-xl font-bold text-wrap break-words">
-            {noteTitle}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div
+            className={`break-inside-avoid bg-yellow-200 p-2 mb-5 h-max rounded-xl ${
+              isUpdateNoteModalOpen && "invisible"
+            }`}
+          >
+            <div className="flex justify-end">
+              {note.isPinned ? (
+                <TbPinnedFilled
+                  className="text-xl font-bold cursor-pointer"
+                  onClick={handlePinNote}
+                  data-tooltip-id="unpin"
+                  data-tooltip-content="Unpin"
+                />
+              ) : (
+                <VscPinned
+                  className="text-xl font-bold cursor-pointer"
+                  onClick={handlePinNote}
+                  data-tooltip-id="pin"
+                  data-tooltip-content="Pin"
+                />
+              )}
+            </div>
+            <div>
+              <div className="p-2 text-xl font-bold text-wrap break-words">
+                {noteTitle}
+              </div>
+              <div className="font-semibold text-sm pl-2 text-wrap break-words">
+                {noteTagline}
+              </div>
+              <div className="text-lg p-2 text-wrap break-words">
+                {noteBody}
+              </div>
+            </div>
+            <div className="flex justify-between gap-2">
+              <div className="text-xs font-light m-2 text-gray-500">
+                {note.dateOfCreation}
+              </div>
+              <div className="flex justify-end gap-2">
+                <img
+                  src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/edit.png"
+                  alt="edit-note-icon"
+                  className="h-5 w-5 cursor-pointer"
+                  onClick={() => setIsUpdateNoteModalOpen(true)}
+                  data-tooltip-id="edit"
+                  data-tooltip-content="Edit"
+                />
+                <img
+                  src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/delete.png"
+                  alt="delete-note-icon"
+                  className="h-5 w-5 cursor-pointer"
+                  onClick={handleDeleteNote}
+                  data-tooltip-id="delete"
+                  data-tooltip-content="Delete"
+                />
+              </div>
+            </div>
           </div>
-          <div className="font-semibold text-sm pl-2 text-wrap break-words">
-            {noteTagline}
-          </div>
-          <div className="text-lg p-2 text-wrap break-words">{noteBody}</div>
-        </div>
-        <div className="flex justify-between gap-2">
-          <div className="text-xs font-light m-2 text-gray-500">
-            {note.dateOfCreation}
-          </div>
-          <div className="flex justify-end gap-2">
-            <img
-              src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/edit.png"
-              alt="edit-note-icon"
-              className="h-5 w-5 cursor-pointer"
-              onClick={() => setIsUpdateNoteModalOpen(true)}
-              data-tooltip-id="edit"
-              data-tooltip-content="Edit"
-            />
-            <img
-              src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/delete.png"
-              alt="delete-note-icon"
-              className="h-5 w-5 cursor-pointer"
-              onClick={handleDeleteNote}
-              data-tooltip-id="delete"
-              data-tooltip-content="Delete"
-            />
-          </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
       {isUpdateNoteModalOpen && (
         <UpdateNoteModal
           noteTitle={noteTitle}
@@ -145,7 +155,7 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
       <Tooltip id="unpin" className="tooltip" />
       <Tooltip id="edit" className="tooltip" />
       <Tooltip id="delete" className="tooltip" />
-    </motion.div>
+    </>
   );
 };
 
