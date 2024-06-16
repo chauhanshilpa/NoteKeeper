@@ -43,11 +43,11 @@ function App() {
     <>
       <Navbar setCurrentPage={setCurrentPage} />
       {notesList.length > 0 ? (
-        <div className="fixed right-0">
+        <div className="fixed right-0 p-2">
           <img
-            src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/add.png"
+            src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/add-a-note.png"
             alt="add-note"
-            className="h-5 w-5 mr-5 cursor-pointer mt-5"
+            className="h-10 w-10 mr-5 bg-[#8cc055] cursor-pointer mt-5 border rounded-lg shadow-lg hover:bg-[#7CB342]"
             onClick={() => setIsAddNoteClicked(true)}
             data-tooltip-id="add-new-note"
             data-tooltip-content="Add note"
