@@ -1,4 +1,4 @@
-import { RefObject, useRef } from "react";
+import { RefObject, useRef, useEffect } from "react";
 import { VscPinned } from "react-icons/vsc";
 import { TbPinnedFilled } from "react-icons/tb";
 import { Note } from "../utils/classModels";
@@ -12,6 +12,7 @@ import { useState } from "react";
 import UpdateNoteModal from "./UpdateNoteModal";
 import { Tooltip } from "react-tooltip";
 import { motion } from "framer-motion";
+import ColorPalatte from "./ColorPalatte";
 interface Props {
   note: Note;
   setNotesList: React.Dispatch<React.SetStateAction<Note[]>>;
@@ -24,8 +25,21 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
   const [noteTitle, setNoteTitle] = useState<string>(note.title);
   const [noteTagline, setNoteTagline] = useState<string>(note.tagline);
   const [noteBody, setNoteBody] = useState<string>(note.body);
+  const [isColorPalatteOpen, setIsColorPalatteOpen] = useState<boolean>(false);
+  const [noteBackgroundColor, setNoteBackgroundColor] = useState<string>("");
+  const [noteBackgroundImage, setNoteBackgroundImage] = useState<string>("");
 
   const pipRef = useRef<HTMLDivElement>(null);
+  const colorPalatteRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (event: any) => {
+      if (!colorPalatteRef.current?.contains(event.target)) {
+        setIsColorPalatteOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+  });
 
   async function handleUpdateNoteCard() {
     await updateNote(note.id, noteTitle, noteTagline, noteBody);
@@ -63,6 +77,16 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
     return 0;
   };
 
+  function handleNoteBackgroundColor(color: string) {
+    setNoteBackgroundColor(color);
+    setNoteBackgroundImage("");
+  }
+
+  function handleNoteBackgroundImage(src: string) {
+    setNoteBackgroundImage(src);
+    setNoteBackgroundColor("");
+  }
+
   return (
     <>
       <motion.div
@@ -81,9 +105,19 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
           transition={{ duration: 0.5 }}
         >
           <div
-            className={`break-inside-avoid bg-yellow-200 p-2 mb-5 h-max rounded-xl ${
+            className={`break-inside-avoid p-2 border mb-5 h-max shadow-lg rounded-xl ${
               isUpdateNoteModalOpen && "invisible"
             }`}
+            style={{
+              backgroundColor:
+                noteBackgroundImage === "" ? `#${noteBackgroundColor}` : "",
+              backgroundImage:
+                noteBackgroundImage !== "" ? `url(${noteBackgroundImage})` : "",
+              backgroundSize: noteBackgroundImage !== "" ? "cover" : "",
+              backgroundRepeat:
+                noteBackgroundImage !== "" ? "repeat" : "no-repeat",
+              backgroundPosition: "center",
+            }}
           >
             <div className="flex justify-end">
               {note.isPinned ? (
@@ -114,10 +148,18 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
               </div>
             </div>
             <div className="flex justify-between gap-2">
-              <div className="text-xs font-light m-2 text-gray-500">
+              <div className="text-xs font-light m-2 text-gray-900">
                 {note.dateOfCreation}
               </div>
-              <div className="flex justify-end gap-2">
+              <div className="flex justify-end items-center py-1 px-4 gap-2 rounded-xl shadow-xl">
+                <img
+                  src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/color-palette.png"
+                  alt="color-palatte-icon"
+                  className="h-5 w-5 cursor-pointer"
+                  onClick={() => setIsColorPalatteOpen(true)}
+                  data-tooltip-id="color"
+                  data-tooltip-content="Add background"
+                />
                 <img
                   src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/edit.png"
                   alt="edit-note-icon"
@@ -139,6 +181,13 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
           </div>
         </motion.div>
       </motion.div>
+      {isColorPalatteOpen && (
+        <ColorPalatte
+          colorPalatteRef={colorPalatteRef}
+          handleNoteBackgroundColor={handleNoteBackgroundColor}
+          handleNoteBackgroundImage={handleNoteBackgroundImage}
+        />
+      )}
       {isUpdateNoteModalOpen && (
         <UpdateNoteModal
           noteTitle={noteTitle}
@@ -155,6 +204,7 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
       <Tooltip id="unpin" className="tooltip" />
       <Tooltip id="edit" className="tooltip" />
       <Tooltip id="delete" className="tooltip" />
+      <Tooltip id="color" className="tooltip" />
     </>
   );
 };
