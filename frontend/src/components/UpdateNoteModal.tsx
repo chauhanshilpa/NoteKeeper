@@ -21,14 +21,13 @@ const UpdateNoteModal = ({
   setIsUpdateNoteModalOpen,
   handleUpdateNoteCard,
 }: Props) => {
-  
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 mt-20">
-      <div className="flex flex-col justify-center bg-green-200 p-5 rounded-xl w-[50%] relative">
+      <div className="flex flex-col justify-center bg-gray-50 border shadow p-5 rounded-xl w-[40%] relative">
         <img
           src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/cancel.png"
           alt="cancel"
-          className="h-5 w-5 cursor-pointer self-end"
+          className="h-5 w-5 cursor-pointer self-end hover:scale-125"
           onClick={() => setIsUpdateNoteModalOpen(false)}
           data-tooltip-id="cancel"
           data-tooltip-content="Cancel"
@@ -68,7 +67,7 @@ const UpdateNoteModal = ({
         <div className="flex">
           <button
             type="button"
-            className="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            className="flex items-center text-white bg-blue-500 hover:bg-blue-600  focus:ring-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none border-transparent focus:ring-1"
             onClick={handleUpdateNoteCard}
           >
             <span>

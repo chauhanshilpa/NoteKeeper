@@ -26,12 +26,12 @@ const AddNoteCard = ({ setIsAddNoteClicked, setNotesList }: Props) => {
   }
 
   return (
-    <div className="flex justify-center">
-      <div className="flex flex-col fixed justify-center bg-gray-300 p-5 rounded-xl m-auto w-[30%]">
+    <div className="fixed inset-0 flex items-center justify-center z-50 mt-5">
+      <div className="flex flex-col fixed justify-center bg-gray-50 border shadow p-5 rounded-xl m-auto w-[40%]">
         <img
           src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/cancel.png"
           alt="cancel"
-          className="h-5 w-5 cursor-pointer self-end"
+          className="h-5 w-5 cursor-pointer self-end hover:scale-125"
           onClick={() => setIsAddNoteClicked(false)}
           data-tooltip-id="cancel"
           data-tooltip-content="Cancel"
@@ -71,7 +71,7 @@ const AddNoteCard = ({ setIsAddNoteClicked, setNotesList }: Props) => {
         <div className="flex">
           <button
             type="button"
-            className="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            className="flex items-center text-white bg-blue-500 hover:bg-blue-600  focus:ring-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none border-transparent focus:ring-1"
             onClick={handleAddNote}
           >
             <span>
@@ -81,7 +81,7 @@ const AddNoteCard = ({ setIsAddNoteClicked, setNotesList }: Props) => {
           </button>
           <button
             type="button"
-            className="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            className="flex items-center text-white bg-blue-500 hover:bg-blue-600  focus:ring-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none border-transparent focus:ring-1"
             onClick={() => {
               setInputNoteTitle("");
               setInputNoteTagline("");

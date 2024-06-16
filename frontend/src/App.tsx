@@ -47,7 +47,7 @@ function App() {
           <img
             src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/add-a-note.png"
             alt="add-note"
-            className="h-10 w-10 mr-5 bg-[#8cc055] cursor-pointer mt-5 border rounded-lg shadow-lg hover:bg-[#7CB342]"
+            className="h-10 w-10 mr-5 bg-[#8cc055] cursor-pointer mt-5 border rounded-lg shadow-lg hover:bg-[#7CB342] ml-2"
             onClick={() => setIsAddNoteClicked(true)}
             data-tooltip-id="add-new-note"
             data-tooltip-content="Add note"
@@ -80,6 +80,7 @@ function App() {
               notesList={notesList}
               setNotesList={setNotesList}
               currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
               handlePageNavigation={handlePageNavigation}
             />
           }
