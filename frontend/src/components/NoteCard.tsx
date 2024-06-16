@@ -13,6 +13,10 @@ import UpdateNoteModal from "./UpdateNoteModal";
 import { Tooltip } from "react-tooltip";
 import { motion } from "framer-motion";
 import ColorPalatte from "./ColorPalatte";
+import deleteSound from "../audio/delete.mp3";
+import editSound from "../audio/edit.mp3";
+import bgApplySound from "../audio/bg-apply.mp3";
+import pinSound from "../audio/pin.wav";
 interface Props {
   note: Note;
   setNotesList: React.Dispatch<React.SetStateAction<Note[]>>;
@@ -41,8 +45,18 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
     document.addEventListener("mousedown", handler);
   });
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const color = localStorage.getItem("color");
+      setNoteBackgroundColor(color ? color : "");
+      const src = localStorage.getItem("src");
+      setNoteBackgroundImage(src ? src : "");
+    }
+  }, []);
+
   async function handleUpdateNoteCard() {
     await updateNote(note.id, noteTitle, noteTagline, noteBody);
+    new Audio(editSound).play();
     setIsUpdateNoteModalOpen(false);
     const response = await getNotesList();
     setNotesList(response.data.newNotesList);
@@ -50,6 +64,9 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
 
   async function handlePinNote() {
     const isNotePinned = note.isPinned;
+    if (isNotePinned === false) {
+      new Audio(pinSound).play();
+    }
     await togglePinnedNote(note.id, !isNotePinned);
     const response = await getNotesList();
     setNotesList(response.data.newNotesList);
@@ -57,6 +74,7 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
 
   async function handleDeleteNote() {
     await deleteNote(note.id);
+    new Audio(deleteSound).play();
     const response = await getNotesList();
     setNotesList(response.data.newNotesList);
   }
@@ -78,13 +96,21 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
   };
 
   function handleNoteBackgroundColor(color: string) {
+    new Audio(bgApplySound).play();
     setNoteBackgroundColor(color);
     setNoteBackgroundImage("");
+    if (typeof window !== "undefined") {
+      localStorage.setItem("color", color);
+    }
   }
 
   function handleNoteBackgroundImage(src: string) {
+    new Audio(bgApplySound).play();
     setNoteBackgroundImage(src);
     setNoteBackgroundColor("");
+    if (typeof window !== "undefined") {
+      localStorage.setItem("src", src);
+    }
   }
 
   return (
@@ -122,14 +148,14 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
             <div className="flex justify-end">
               {note.isPinned ? (
                 <TbPinnedFilled
-                  className="text-xl font-bold cursor-pointer"
+                  className="text-xl font-bold cursor-pointer border-transparent focus:outline-none"
                   onClick={handlePinNote}
                   data-tooltip-id="unpin"
                   data-tooltip-content="Unpin"
                 />
               ) : (
                 <VscPinned
-                  className="text-xl font-bold cursor-pointer"
+                  className="text-xl font-bold cursor-pointer border-transparent focus:outline-none"
                   onClick={handlePinNote}
                   data-tooltip-id="pin"
                   data-tooltip-content="Pin"
