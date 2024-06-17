@@ -1,4 +1,3 @@
-import { RefObject } from "react";
 import { Note } from "../utils/classModels";
 import NoteCard from "./NoteCard";
 

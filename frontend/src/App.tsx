@@ -72,7 +72,18 @@ function App() {
         />
       )}
       <Routes>
-        <Route path="/" element={<Navigate to="/page/0" />} />
+        <Route
+          path="/"
+          element={
+            <NotesPage
+              notesList={notesList}
+              setNotesList={setNotesList}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              handlePageNavigation={handlePageNavigation}
+            />
+          }
+        />
         <Route
           path="/page/:currentPage"
           element={

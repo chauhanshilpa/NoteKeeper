@@ -15,7 +15,6 @@ import { Tooltip } from "react-tooltip";
 import { motion } from "framer-motion";
 import ColorPalatte from "./ColorPalatte";
 import deleteSound from "../audio/delete.mp3";
-import editSound from "../audio/edit.mp3";
 import bgApplySound from "../audio/bg-apply.mp3";
 import pinSound from "../audio/pin.wav";
 interface Props {
@@ -54,7 +53,7 @@ const NoteCard = ({ note, setNotesList }: Props) => {
 
   async function handleUpdateNoteCard() {
     await updateNote(note.id, noteTitle, noteTagline, noteBody);
-    new Audio(editSound).play();
+    new Audio(bgApplySound).play();
     setIsUpdateNoteModalOpen(false);
     const response = await getNotesList();
     setNotesList(response.data.newNotesList);
