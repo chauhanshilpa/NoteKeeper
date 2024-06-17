@@ -32,6 +32,7 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
   const [isColorPalatteOpen, setIsColorPalatteOpen] = useState<boolean>(false);
   const [noteBackgroundColor, setNoteBackgroundColor] = useState<string>("");
   const [noteBackgroundImage, setNoteBackgroundImage] = useState<string>("");
+  const [noteCardHovered, setNoteCardHovered] = useState(false);
 
   const pipRef = useRef<HTMLDivElement>(null);
   const colorPalatteRef = useRef<HTMLDivElement>(null);
@@ -53,6 +54,15 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
       setNoteBackgroundImage(src ? src : "");
     }
   }, []);
+
+   useEffect(() => {
+     if (noteCardHovered) {
+       const timer = setTimeout(() => {
+         setNoteCardHovered(false);
+       }, 1000); // duration of the animation in milliseconds
+       return () => clearTimeout(timer);
+     }
+   }, [noteCardHovered]);
 
   async function handleUpdateNoteCard() {
     await updateNote(note.id, noteTitle, noteTagline, noteBody);
@@ -130,81 +140,99 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div
-            className={`break-inside-avoid p-2 border mb-5 h-max shadow-lg rounded-xl ${
-              isUpdateNoteModalOpen && "invisible"
-            }`}
-            style={{
-              backgroundColor:
-                noteBackgroundImage === "" ? `#${noteBackgroundColor}` : "",
-              backgroundImage:
-                noteBackgroundImage !== "" ? `url(${noteBackgroundImage})` : "",
-              backgroundSize: noteBackgroundImage !== "" ? "cover" : "",
-              backgroundRepeat:
-                noteBackgroundImage !== "" ? "repeat" : "no-repeat",
-              backgroundPosition: "center",
+          <motion.div
+            onMouseEnter={() => setNoteCardHovered(true)}
+            animate={
+              noteCardHovered ? { rotate: [0, 1, -1, 0] } : { rotate: 0 }
+            }
+            transition={{
+              duration: 1,
             }}
           >
-            <div className="flex justify-end">
-              {note.isPinned ? (
-                <TbPinnedFilled
-                  className="text-xl font-bold cursor-pointer border-transparent focus:outline-none"
-                  onClick={handlePinNote}
-                  data-tooltip-id="unpin"
-                  data-tooltip-content="Unpin"
-                />
-              ) : (
-                <VscPinned
-                  className="text-xl font-bold cursor-pointer border-transparent focus:outline-none"
-                  onClick={handlePinNote}
-                  data-tooltip-id="pin"
-                  data-tooltip-content="Pin"
-                />
-              )}
+            <div
+              className={`break-inside-avoid p-2 border mb-5 h-max shadow-lg rounded-xl ${
+                isUpdateNoteModalOpen && "invisible"
+              }`}
+              style={{
+                backgroundColor:
+                  noteBackgroundImage === "" ? `#${noteBackgroundColor}` : "",
+                backgroundImage:
+                  noteBackgroundImage !== ""
+                    ? `url(${noteBackgroundImage})`
+                    : "",
+                backgroundSize: noteBackgroundImage !== "" ? "cover" : "",
+                backgroundRepeat:
+                  noteBackgroundImage !== "" ? "repeat" : "no-repeat",
+                backgroundPosition: "center",
+              }}
+            >
+              <div
+                className="flex justify-end"
+                onMouseEnter={() => setNoteCardHovered(false)}
+              >
+                {note.isPinned ? (
+                  <TbPinnedFilled
+                    className="text-xl font-bold cursor-pointer border-transparent focus:outline-none"
+                    onClick={handlePinNote}
+                    data-tooltip-id="unpin"
+                    data-tooltip-content="Unpin"
+                  />
+                ) : (
+                  <VscPinned
+                    className="text-xl font-bold cursor-pointer border-transparent focus:outline-none"
+                    onClick={handlePinNote}
+                    data-tooltip-id="pin"
+                    data-tooltip-content="Pin"
+                  />
+                )}
+              </div>
+              <div>
+                <div className="p-2 text-xl font-bold text-wrap break-words">
+                  {noteTitle}
+                </div>
+                <div className="font-semibold text-sm pl-2 text-wrap break-words">
+                  {noteTagline}
+                </div>
+                <div className="text-lg p-2 text-wrap break-words">
+                  {noteBody}
+                </div>
+              </div>
+              <div className="flex justify-between gap-2">
+                <div className="text-xs font-light m-2 text-gray-900">
+                  {note.dateOfCreation}
+                </div>
+                <div
+                  className="flex justify-end items-center py-1 px-4 gap-2 rounded-xl shadow-xl"
+                  onMouseEnter={() => setNoteCardHovered(false)}
+                >
+                  <img
+                    src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/color-palette.png"
+                    alt="color-palatte-icon"
+                    className="h-5 w-5 cursor-pointer"
+                    onClick={() => setIsColorPalatteOpen(true)}
+                    data-tooltip-id="color"
+                    data-tooltip-content="Add background"
+                  />
+                  <img
+                    src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/edit.png"
+                    alt="edit-note-icon"
+                    className="h-5 w-5 cursor-pointer"
+                    onClick={() => setIsUpdateNoteModalOpen(true)}
+                    data-tooltip-id="edit"
+                    data-tooltip-content="Edit"
+                  />
+                  <img
+                    src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/delete.png"
+                    alt="delete-note-icon"
+                    className="h-5 w-5 cursor-pointer"
+                    onClick={handleDeleteNote}
+                    data-tooltip-id="delete"
+                    data-tooltip-content="Delete"
+                  />
+                </div>
+              </div>
             </div>
-            <div>
-              <div className="p-2 text-xl font-bold text-wrap break-words">
-                {noteTitle}
-              </div>
-              <div className="font-semibold text-sm pl-2 text-wrap break-words">
-                {noteTagline}
-              </div>
-              <div className="text-lg p-2 text-wrap break-words">
-                {noteBody}
-              </div>
-            </div>
-            <div className="flex justify-between gap-2">
-              <div className="text-xs font-light m-2 text-gray-900">
-                {note.dateOfCreation}
-              </div>
-              <div className="flex justify-end items-center py-1 px-4 gap-2 rounded-xl shadow-xl">
-                <img
-                  src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/color-palette.png"
-                  alt="color-palatte-icon"
-                  className="h-5 w-5 cursor-pointer"
-                  onClick={() => setIsColorPalatteOpen(true)}
-                  data-tooltip-id="color"
-                  data-tooltip-content="Add background"
-                />
-                <img
-                  src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/edit.png"
-                  alt="edit-note-icon"
-                  className="h-5 w-5 cursor-pointer"
-                  onClick={() => setIsUpdateNoteModalOpen(true)}
-                  data-tooltip-id="edit"
-                  data-tooltip-content="Edit"
-                />
-                <img
-                  src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/delete.png"
-                  alt="delete-note-icon"
-                  className="h-5 w-5 cursor-pointer"
-                  onClick={handleDeleteNote}
-                  data-tooltip-id="delete"
-                  data-tooltip-content="Delete"
-                />
-              </div>
-            </div>
-          </div>
+          </motion.div>
         </motion.div>
       </motion.div>
       {isColorPalatteOpen && (
