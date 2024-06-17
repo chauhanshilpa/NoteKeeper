@@ -3,6 +3,7 @@ import { VscPinned } from "react-icons/vsc";
 import { TbPinnedFilled } from "react-icons/tb";
 import { Note } from "../utils/classModels";
 import {
+  changeBackground,
   deleteNote,
   getNotesList,
   togglePinnedNote,
@@ -30,8 +31,8 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
   const [noteTagline, setNoteTagline] = useState<string>(note.tagline);
   const [noteBody, setNoteBody] = useState<string>(note.body);
   const [isColorPalatteOpen, setIsColorPalatteOpen] = useState<boolean>(false);
-  const [noteBackgroundColor, setNoteBackgroundColor] = useState<string>("");
-  const [noteBackgroundImage, setNoteBackgroundImage] = useState<string>("");
+  // const [noteBackgroundColor, setNoteBackgroundColor] = useState<string>("");
+  // const [noteBackgroundImage, setNoteBackgroundImage] = useState<string>("");
   const [noteCardHovered, setNoteCardHovered] = useState(false);
 
   const pipRef = useRef<HTMLDivElement>(null);
@@ -47,22 +48,13 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
   });
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const color = localStorage.getItem("color");
-      setNoteBackgroundColor(color ? color : "");
-      const src = localStorage.getItem("src");
-      setNoteBackgroundImage(src ? src : "");
+    if (noteCardHovered) {
+      const timer = setTimeout(() => {
+        setNoteCardHovered(false);
+      }, 1000); // duration of the animation in milliseconds
+      return () => clearTimeout(timer);
     }
-  }, []);
-
-   useEffect(() => {
-     if (noteCardHovered) {
-       const timer = setTimeout(() => {
-         setNoteCardHovered(false);
-       }, 1000); // duration of the animation in milliseconds
-       return () => clearTimeout(timer);
-     }
-   }, [noteCardHovered]);
+  }, [noteCardHovered]);
 
   async function handleUpdateNoteCard() {
     await updateNote(note.id, noteTitle, noteTagline, noteBody);
@@ -105,22 +97,22 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
     return 0;
   };
 
-  function handleNoteBackgroundColor(color: string) {
+  async function handleNoteBackgroundColor(color: string) {
     new Audio(bgApplySound).play();
-    setNoteBackgroundColor(color);
-    setNoteBackgroundImage("");
-    if (typeof window !== "undefined") {
-      localStorage.setItem("color", color);
-    }
+    // setNoteBackgroundColor(color);
+    // setNoteBackgroundImage("");
+    await changeBackground(note.id, color, "");
+    const response = await getNotesList();
+    setNotesList(response.data.newNotesList);
   }
 
-  function handleNoteBackgroundImage(src: string) {
+  async function handleNoteBackgroundImage(src: string) {
     new Audio(bgApplySound).play();
-    setNoteBackgroundImage(src);
-    setNoteBackgroundColor("");
-    if (typeof window !== "undefined") {
-      localStorage.setItem("src", src);
-    }
+    // setNoteBackgroundImage(src);
+    // setNoteBackgroundColor("");
+    await changeBackground(note.id, "", src);
+    const response = await getNotesList();
+    setNotesList(response.data.newNotesList);
   }
 
   return (
@@ -150,19 +142,16 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
             }}
           >
             <div
-              className={`break-inside-avoid p-2 border mb-5 h-max shadow-lg rounded-xl ${
+              className={`break-inside-avoid p-2 bg-gray-50 border mb-5 h-max shadow-lg rounded-xl ${
                 isUpdateNoteModalOpen && "invisible"
               }`}
               style={{
-                backgroundColor:
-                  noteBackgroundImage === "" ? `#${noteBackgroundColor}` : "",
+                backgroundColor: note.bgColor !== "" ? `#${note.bgColor}` : "",
                 backgroundImage:
-                  noteBackgroundImage !== ""
-                    ? `url(${noteBackgroundImage})`
-                    : "",
-                backgroundSize: noteBackgroundImage !== "" ? "cover" : "",
+                  note.bgImageSrc !== "" ? `url(${note.bgImageSrc})` : "",
+                backgroundSize: note.bgImageSrc !== "" ? "cover" : "",
                 backgroundRepeat:
-                  noteBackgroundImage !== "" ? "repeat" : "no-repeat",
+                  note.bgImageSrc !== "" ? "repeat" : "no-repeat",
                 backgroundPosition: "center",
               }}
             >

@@ -16,7 +16,7 @@ const ColorPalatte = ({
 
   return (
     <div
-      className="color-palatte flex absolute flex-col bg-gray-100 z-99 rounded-xl border -mt-7"
+      className="color-palatte flex absolute flex-col bg-gray-100 rounded-xl border -mt-7"
       ref={colorPalatteRef}
     >
       <div className="flex justify-between p-2">
@@ -35,7 +35,7 @@ const ColorPalatte = ({
             key={uuidv4()}
             src={item.src}
             alt="note-background"
-            className="h-5 w-6 rounded-md cursor-pointer border"
+            className="h-5 w-6 rounded-md cursor-pointer border bg-gray-200"
             onClick={() => handleNoteBackgroundImage(item.src)}
           />
         ))}

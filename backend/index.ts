@@ -18,6 +18,8 @@ app.post("/create_note", async (req, res) => {
     noteId,
     inputNoteTitle,
     inputNoteTagline,
+    "",
+    "",
     inputNoteBody,
     false,
     false,
@@ -48,7 +50,20 @@ app.patch("/update_pin_status", async (req, res) => {
     (note) => note.id === noteId
   );
   newNotesList[noteToChangePinnedState].isPinned = isPinned;
+  notesList = [...newNotesList]
   res.send();
+});
+
+app.patch("/update_note_background", async (req, res) => {
+  const { noteId, color, src } = req.body;
+  let newNotesList = [...notesList];
+  const noteToChangePinnedState = newNotesList.findIndex(
+    (note) => note.id === noteId
+  );
+  newNotesList[noteToChangePinnedState].bgColor = color;
+  newNotesList[noteToChangePinnedState].bgImageSrc = src;
+  notesList = [...newNotesList];
+  res.send()
 });
 
 app.delete("/delete_note", async (req, res) => {

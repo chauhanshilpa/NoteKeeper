@@ -43,6 +43,14 @@ export async function togglePinnedNote(noteId: string, isPinned: boolean) {
   });
 }
 
+export async function changeBackground(noteId:string, color: string, src: string) {
+  await axios.patch(`${BASE_URL}/update_note_background`, {
+    noteId,
+    color,
+    src,
+  });
+}
+
 // delete a note
 export async function deleteNote(noteId: string) {
   await axios.delete(`${BASE_URL}/delete_note`, {
