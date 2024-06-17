@@ -1,7 +1,5 @@
 // This file includes all hard coded constants
 
-export const BASE_URL = "http://localhost:4001";
-
 export const COLORS_LIST = [
   "E8C5E5",
   "FFCBCB",

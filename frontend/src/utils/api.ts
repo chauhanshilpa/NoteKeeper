@@ -1,6 +1,6 @@
 import axios from "axios";
-import { BASE_URL } from "./constants";
 
+const BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
 // create a note
 export async function createNote(
   inputNoteTitle: string,
