@@ -1,6 +1,10 @@
 import { RxUpdate } from "react-icons/rx";
 import { Tooltip } from "react-tooltip";
+import { motion } from "framer-motion";
 interface Props {
+  noteId: string;
+  noteBgImageSrc: string;
+  noteBgColor: string;
   noteTitle: string;
   setNoteTitle: React.Dispatch<React.SetStateAction<string>>;
   noteTagline: string;
@@ -12,6 +16,9 @@ interface Props {
 }
 
 const UpdateNoteModal = ({
+  noteId,
+  noteBgImageSrc,
+  noteBgColor,
   noteTitle,
   setNoteTitle,
   noteTagline,
@@ -22,8 +29,21 @@ const UpdateNoteModal = ({
   handleUpdateNoteCard,
 }: Props) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 mt-20">
-      <div className="flex flex-col justify-center bg-gray-50 border shadow p-5 rounded-xl w-[40%] relative">
+    <motion.div
+      layoutId={noteId}
+      className="fixed inset-0 flex items-center justify-center z-50 mt-20"
+    >
+      <div
+        className="flex flex-col justify-center bg-gray-50 border shadow p-5 rounded-xl w-[40%] relative"
+        style={{
+          backgroundColor: noteBgColor !== "" ? `#${noteBgColor}` : "",
+          backgroundImage:
+            noteBgImageSrc !== "" ? `url(${noteBgImageSrc})` : "",
+          backgroundSize: noteBgImageSrc !== "" ? "cover" : "",
+          backgroundRepeat: noteBgImageSrc !== "" ? "repeat" : "no-repeat",
+          backgroundPosition: "center",
+        }}
+      >
         <img
           src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/cancel.png"
           alt="cancel"
@@ -78,7 +98,7 @@ const UpdateNoteModal = ({
         </div>
       </div>
       <Tooltip id="cancel" className="tooltip" />
-    </div>
+    </motion.div>
   );
 };
 

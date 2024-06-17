@@ -1,4 +1,4 @@
-import { RefObject, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { VscPinned } from "react-icons/vsc";
 import { TbPinnedFilled } from "react-icons/tb";
 import { Note } from "../utils/classModels";
@@ -47,7 +47,7 @@ const NoteCard = ({ note, setNotesList }: Props) => {
     if (noteCardHovered) {
       const timer = setTimeout(() => {
         setNoteCardHovered(false);
-      }, 1000); // duration of the animation in milliseconds
+      }, 1000);
       return () => clearTimeout(timer);
     }
   }, [noteCardHovered]);
@@ -105,7 +105,8 @@ const NoteCard = ({ note, setNotesList }: Props) => {
             duration: 1,
           }}
         >
-          <div
+          <motion.div
+            layoutId={note.id}
             className={`break-inside-avoid p-2 bg-gray-50 border mb-5 h-max shadow-lg pointer-events-auto rounded-xl ${
               isUpdateNoteModalOpen && "invisible"
             }`}
@@ -182,7 +183,7 @@ const NoteCard = ({ note, setNotesList }: Props) => {
                 />
               </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </motion.div>
       {isColorPalatteOpen && (
@@ -194,6 +195,9 @@ const NoteCard = ({ note, setNotesList }: Props) => {
       )}
       {isUpdateNoteModalOpen && (
         <UpdateNoteModal
+          noteId={note.id}
+          noteBgImageSrc={note.bgImageSrc}
+          noteBgColor={note.bgColor}
           noteTitle={noteTitle}
           setNoteTitle={setNoteTitle}
           noteTagline={noteTagline}
