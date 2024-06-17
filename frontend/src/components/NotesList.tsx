@@ -18,23 +18,16 @@ const NotesList = ({ currentNotesList, setNotesList }: Props) => {
   return (
     <div className="w-[80%] m-auto mt-24">
       {pinnedNotesList.length > 0 && (
-        <div className="xs:w-[60%] sm:w-[100%] columns-1 sm:columns-2 md:columns-3 2xl:columns-4 m-auto mb-10">
+        <div className="w-[60%] sm:w-[100%] columns-1 sm:columns-2 md:columns-3 2xl:columns-4 m-auto mb-10">
           {pinnedNotesList.map((note) => (
-            <NoteCard
-              key={note.id}
-              note={note}
-              setNotesList={setNotesList}/>
+            <NoteCard key={note.id} note={note} setNotesList={setNotesList} />
           ))}
         </div>
       )}
       {unpinnedNotesList.length > 0 && (
-        <div className="xs:w-[60%] sm:w-[100%] columns-1 sm:columns-2 md:columns-3 2xl:columns-4 m-auto">
+        <div className="w-[60%] xs:w-[80%] columns-1 sm:columns-2 md:columns-3 2xl:columns-4 m-auto">
           {unpinnedNotesList.map((note) => (
-            <NoteCard
-              key={note.id}
-              note={note}
-              setNotesList={setNotesList}
-            />
+            <NoteCard key={note.id} note={note} setNotesList={setNotesList} />
           ))}
         </div>
       )}
