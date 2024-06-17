@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import { v4 as uuidv4 } from "uuid";
 import { Note } from "../frontend/src/utils/classModels";
 
-const port: Number = 4001;
+const port: number = 4001;
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
