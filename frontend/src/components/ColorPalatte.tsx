@@ -16,10 +16,10 @@ const ColorPalatte = ({
 
   return (
     <div
-      className="color-palatte flex absolute flex-col bg-gray-100 rounded-xl border -mt-7"
+      className="color-palatte flex absolute flex-col mr-2 bg-gray-100 rounded-xl border -mt-7"
       ref={colorPalatteRef}
     >
-      <div className="flex justify-between p-2">
+      <div className="flex justify-center gap-1 flex-wrap p-2">
         {COLORS_LIST.map((color) => (
           <div
             key={uuidv4()}
@@ -29,13 +29,13 @@ const ColorPalatte = ({
           ></div>
         ))}
       </div>
-      <div className="flex justify-between p-2">
+      <div className="flex justify-center gap-1 flex-wrap p-2">
         {NOTE_BACKGROUND_IMAGES_LIST.map((item) => (
           <img
             key={uuidv4()}
             src={item.src}
             alt="note-background"
-            className="h-5 w-6 rounded-md cursor-pointer border bg-gray-200"
+            className="m-1 h-5 w-6 rounded-md cursor-pointer border bg-gray-200"
             onClick={() => handleNoteBackgroundImage(item.src)}
           />
         ))}

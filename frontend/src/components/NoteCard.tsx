@@ -154,7 +154,7 @@ const NoteCard = ({ note, setNotesList }: Props) => {
                 {note.dateOfCreation}
               </div>
               <div
-                className="flex justify-end items-center py-1 px-4 gap-2 rounded-xl shadow-xl"
+                className="flex justify-end flex-wrap items-center p-1 gap-2 rounded-xl shadow-xl"
                 onMouseEnter={() => setNoteCardHovered(false)}
               >
                 <img
