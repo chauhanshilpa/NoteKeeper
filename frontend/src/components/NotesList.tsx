@@ -5,10 +5,9 @@ import NoteCard from "./NoteCard";
 interface Props {
   currentNotesList: Note[];
   setNotesList: React.Dispatch<React.SetStateAction<Note[]>>;
-  appRef: RefObject<HTMLDivElement>;
 }
 
-const NotesList = ({ currentNotesList, setNotesList, appRef }: Props) => {
+const NotesList = ({ currentNotesList, setNotesList }: Props) => {
   const pinnedNotesList = currentNotesList.filter(
     (note) => note.isPinned === true
   );
@@ -24,9 +23,7 @@ const NotesList = ({ currentNotesList, setNotesList, appRef }: Props) => {
             <NoteCard
               key={note.id}
               note={note}
-              setNotesList={setNotesList}
-              appRef
-            ={appRef}/>
+              setNotesList={setNotesList}/>
           ))}
         </div>
       )}
@@ -37,7 +34,6 @@ const NotesList = ({ currentNotesList, setNotesList, appRef }: Props) => {
               key={note.id}
               note={note}
               setNotesList={setNotesList}
-              appRef={appRef}
             />
           ))}
         </div>

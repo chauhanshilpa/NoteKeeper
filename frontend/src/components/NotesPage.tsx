@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+// import { useEffect } from "react";
 import { Note } from "../utils/classModels";
 import NotesList from "./NotesList";
 import { GrPrevious, GrNext } from "react-icons/gr";
@@ -18,9 +18,8 @@ const NotePage = ({
   setCurrentPage,
   handlePageNavigation,
 }: Props) => {
-  const appRef = useRef<HTMLDivElement>(null);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const notesPerPage = 6;
   const startIndex = currentPage * notesPerPage;
@@ -42,11 +41,10 @@ const NotePage = ({
   // });
 
   return (
-    <div ref={appRef}>
+    <div>
       <NotesList
         currentNotesList={currentNotesList}
         setNotesList={setNotesList}
-        appRef={appRef}
       />
       <div className="flex justify-between items-center mx-5">
         <button
