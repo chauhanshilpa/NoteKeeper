@@ -27,7 +27,7 @@ const AddNoteCard = ({ setIsAddNoteClicked, setNotesList }: Props) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 mt-5">
-      <div className="flex flex-col fixed justify-center bg-gray-50 border shadow p-5 rounded-xl m-auto w-[40%]">
+      <div className="flex flex-col fixed justify-center bg-gray-50 border shadow p-5 rounded-xl m-auto md:w-[40%] xs:w-[90%]">
         <img
           src="https://note-keeper.s3.eu-north-1.amazonaws.com/note-keeper-icons/cancel.png"
           alt="cancel"

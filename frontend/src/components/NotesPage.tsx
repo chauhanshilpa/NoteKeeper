@@ -48,7 +48,7 @@ const NotePage = ({
       />
       <div className="flex justify-between items-center mx-5">
         <button
-          className={`fixed left-5 top-1/2 transform -translate-y-1/2 px-5 py-2 rounded ${
+          className={`fixed left-0 top-1/2 transform -translate-y-1/2 px-5 py-2 rounded ${
             currentPage === 0 ? "text-white" : "hover:text-blue-500"
           }`}
           disabled={currentPage === 0}
@@ -57,7 +57,7 @@ const NotePage = ({
           <GrPrevious className="text-xl" />
         </button>
         <button
-          className={`fixed right-5 top-1/2 transform -translate-y-1/2 px-5 py-2 rounded  ${
+          className={`fixed right-0 top-1/2 transform -translate-y-1/2 px-5 py-2 rounded  ${
             endIndex >= notesList.length ? "text-white" : "hover:text-blue-500"
           }`}
           disabled={endIndex >= notesList.length}

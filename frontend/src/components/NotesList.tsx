@@ -25,7 +25,7 @@ const NotesList = ({ currentNotesList, setNotesList }: Props) => {
         </div>
       )}
       {unpinnedNotesList.length > 0 && (
-        <div className="w-[60%] xs:w-[80%] columns-1 sm:columns-2 md:columns-3 m-auto">
+        <div className="w-[80%] columns-1 sm:columns-2 md:columns-3 m-auto">
           {unpinnedNotesList.map((note) => (
             <NoteCard key={note.id} note={note} setNotesList={setNotesList} />
           ))}

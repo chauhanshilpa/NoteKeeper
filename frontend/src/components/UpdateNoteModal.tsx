@@ -34,7 +34,7 @@ const UpdateNoteModal = ({
       className="fixed inset-0 flex items-center justify-center z-50 mt-20"
     >
       <div
-        className="flex flex-col justify-center bg-gray-50 border shadow p-5 rounded-xl w-[40%] relative"
+        className="flex flex-col justify-center bg-gray-50 border shadow p-5 rounded-xl md:w-[40%] xs:w-[90%] relative"
         style={{
           backgroundColor: noteBgColor !== "" ? `#${noteBgColor}` : "",
           backgroundImage:
