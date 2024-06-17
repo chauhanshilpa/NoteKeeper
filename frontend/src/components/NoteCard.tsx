@@ -166,16 +166,14 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
                 backgroundPosition: "center",
               }}
             >
-              <div
-                className="flex justify-end"
-                onMouseEnter={() => setNoteCardHovered(false)}
-              >
+              <div className="flex justify-end">
                 {note.isPinned ? (
                   <TbPinnedFilled
                     className="text-xl font-bold cursor-pointer border-transparent focus:outline-none"
                     onClick={handlePinNote}
                     data-tooltip-id="unpin"
                     data-tooltip-content="Unpin"
+                    onMouseEnter={() => setNoteCardHovered(false)}
                   />
                 ) : (
                   <VscPinned
@@ -183,6 +181,7 @@ const NoteCard = ({ note, setNotesList, appRef }: Props) => {
                     onClick={handlePinNote}
                     data-tooltip-id="pin"
                     data-tooltip-content="Pin"
+                    onMouseEnter={() => setNoteCardHovered(false)}
                   />
                 )}
               </div>
