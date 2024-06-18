@@ -25,11 +25,11 @@ const AddNoteCard = ({
   ) {
     event.preventDefault();
     handleAddNoteClick();
-    new Audio(bgApplySound).play();
     await createNote(inputNoteTitle, inputNoteTagline, inputNoteBody);
     const response = await getNotesList();
     setNotesList(response.data.newNotesList);
     setIsAddNoteClicked(false);
+    new Audio(bgApplySound).play();
   }
 
   return (
