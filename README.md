@@ -17,6 +17,10 @@ NoteKeeper is a responsive and user-friendly note-taking application. NoteKeeper
 
 ![second page](./frontend/src/ui_screenshots/note-keeper-second-page.png)
 
+I have re-implemented this project in NextJS to showcase my NextJS skills: [NoteKeeper-NextJS](https://github.com/chauhanshilpa/NoteKeeper-NextJS)
+
+You can try out the application at [link](https://notes-keeper-rho.vercel.app/)
+
 ## UI
 
 1. Has a navbar with logo. A add icon button on top right of page to add a note.
