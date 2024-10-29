@@ -44,4 +44,4 @@ Easily edit, delete, pin and change the background color or image of notes to su
 
 ## Credits
 
-Icons are taken by [flaticons](https://www.flaticon.com) as png images and [react-icons](https://react-icons.github.io/react-icons) library. For more advanced animation [framer](https://www.framer.com/motion/introduction) library is used.
+Icons are taken by [flaticons](https://www.flaticon.com) as png images and [react-icons](https://react-icons.github.io/react-icons) library. For more advanced animation [framer](https://www.framer.com/motion) library is used.
