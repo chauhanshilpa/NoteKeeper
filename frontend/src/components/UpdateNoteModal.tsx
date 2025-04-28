@@ -56,7 +56,7 @@ const UpdateNoteModal = ({
           <input
             type="text"
             name="title"
-            className="py-2.5 px-0 w-full text-xl text-gray-900 bg-transparent appearance-none focus:outline-none focus:ring-0 peer font-bold"
+            className="py-2.5 px-0 w-full text-xl text-gray-900 bg-transparent appearance-none focus:outline-none focus:ring-0 border-0 border-b-2 border-gray-300  dark:border-gray-600  peerpeer font-bold"
             placeholder={noteTitle ? noteTitle : "Title"}
             required
             value={noteTitle}
@@ -67,7 +67,7 @@ const UpdateNoteModal = ({
           <input
             type="text"
             name="tagline"
-            className="py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent focus:outline-none focus:ring-0 peer font-semibold"
+            className="py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 focus:outline-none focus:ring-0 peer font-semibold"
             placeholder={noteTagline ? noteTagline : "Tagline"}
             value={noteTagline}
             onChange={(event) => setNoteTagline(event?.target.value)}
@@ -77,7 +77,7 @@ const UpdateNoteModal = ({
           <input
             type="text"
             name="body"
-            className="py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent focus:outline-none focus:ring-0 peer"
+            className="py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 focus:outline-none focus:ring-0 peer"
             placeholder={noteBody ? noteBody : "body"}
             required
             value={noteBody}
@@ -87,7 +87,7 @@ const UpdateNoteModal = ({
         <div className="flex">
           <button
             type="button"
-            className="flex items-center text-white bg-blue-500 hover:bg-blue-600  focus:ring-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none border-transparent focus:ring-1"
+            className="flex items-center text-white bg-[#7DB146] hover:bg-[#8ac54a]  focus:ring-[#8dd046] font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none border-transparent focus:ring-1"
             onClick={handleUpdateNoteCard}
           >
             <span>

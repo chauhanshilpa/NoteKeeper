@@ -36,7 +36,7 @@ const NotesList = ({
   return (
     <div className="w-[80%] m-auto mt-24">
       {pinnedNotesList.length > 0 && (
-        <div className="w-[80%] columns-1 sm:columns-2 md:columns-3 m-auto mb-10">
+        <div className="w-[90%] columns-1 sm:columns-2 md:columns-3 m-auto mb-10">
           {pinnedNotesList.map((note) => (
             <NoteCard
               key={note.id}
@@ -48,7 +48,7 @@ const NotesList = ({
         </div>
       )}
       {unpinnedNotesList.length > 0 && (
-        <div className="w-[80%] columns-1 sm:columns-2 md:columns-3 m-auto">
+        <div className="w-[90%] columns-1 sm:columns-2 md:columns-3 m-auto">
           {unpinnedNotesList.map((note) => (
             <NoteCard
               key={note.id}

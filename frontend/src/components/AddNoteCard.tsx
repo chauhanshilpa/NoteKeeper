@@ -78,7 +78,7 @@ const AddNoteCard = ({
         <div className="flex">
           <button
             type="button"
-            className="flex items-center text-white bg-blue-500 hover:bg-blue-600  focus:ring-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none border-transparent focus:ring-1"
+            className="flex items-center text-white bg-[#7DB146] hover:bg-[#8ac54a]  focus:ring-[#8dd046] font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none border-transparent focus:ring-1"
             onClick={handleAddNote}
           >
             <span>
@@ -88,7 +88,7 @@ const AddNoteCard = ({
           </button>
           <button
             type="button"
-            className="flex items-center text-white bg-blue-500 hover:bg-blue-600  focus:ring-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none border-transparent focus:ring-1"
+            className="flex items-center text-white bg-[#FFCA28] hover:bg-[#ffd350]  focus:ring-[#ffce3c] font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none border-transparent focus:ring-1"
             onClick={() => {
               setInputNoteTitle("");
               setInputNoteTagline("");
@@ -98,7 +98,7 @@ const AddNoteCard = ({
             <span>
               <CiEraser className="text-xl mr-1" />
             </span>
-            <span>Clear field</span>
+            <span>Clear All Fields</span>
           </button>
         </div>
       </div>
